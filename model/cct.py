@@ -194,7 +194,7 @@ class CCT(nn.Module):
             attn_dropout=attn_dropout, dropout=dropout, 
             mlp_size=mlp_size, positional_embedding=positional_emb, 
             sequence_length=self.tokenizer.sequence_length(
-                n_channels=1, height=3, width=321    # TODO 
+                n_channels=1, height=22, width=1000    # TODO 
             )
         )
         
