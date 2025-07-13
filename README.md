@@ -24,6 +24,67 @@ The datasets used during the current study are available in the BCI Competition 
 [2] Leeb, R. et al. Brain–computer communication: Motivation, aim, and impact of exploring a virtual apartment. IEEE
 Transactions on Neural Syst. Rehabil. Eng. 15, 473–482, DOI: 10.1109/TNSRE.2007.906956 (2007).
 
+## Usage
+
+### Option 1: Modular Package (Recommended)
+
+We provide a clean, modular package structure for easy experimentation and development:
+
+```python
+# Option A: Simple train/test split
+from src.data.preprocessing import load_and_preprocess_bci_data
+from src.models.stmamba_utils import create_complete_setup
+from src.training.trainer import train_model
+from src.utils.visualization import create_comprehensive_report
+
+train_loader, test_loader, metadata = load_and_preprocess_bci_data()
+setup = create_complete_setup()
+results = train_model(setup, train_loader, test_loader)
+create_comprehensive_report(results, setup['model_config'], setup['training_config'])
+
+# Option B: LOSO evaluation (recommended for research)
+from src.training.trainer import run_loso_evaluation
+from src.utils.visualization import save_loso_report
+
+# Complete LOSO evaluation in 3 lines!
+results = run_loso_evaluation(n_classes=4, save_results=True)
+save_loso_report(results, "loso_results")
+print(f"Average accuracy: {results['avg_accuracy']:.2f}%")
+```
+
+**Features:**
+- **LOSO Evaluation**: Subject-independent performance assessment (9-fold cross-validation)
+- **Memory-efficient**: Automatic GPU/CPU fallback, gradient accumulation
+- **Easy experimentation**: Simple configuration management
+- **Comprehensive analysis**: Automated visualization and reporting
+- **Reusable**: Clean modular structure for other projects
+- **4-class & 2-class support**: Motor imagery classification (left, right, feet, tongue)
+
+See `src/README.md` for detailed documentation and `example_usage.py` for complete examples.
+
+### Option 2: Jupyter Notebooks
+
+Individual notebook files are also available for step-by-step experimentation:
+- `cct_bci2a_stmamba.ipynb` - Main STMambaCCT implementation
+- `cct_bci2a_no_augmentation.ipynb` - Baseline implementation
+- Various experiment notebooks in `cct_experiments/`
+
+## Project Structure
+
+```
+EEGCCT/
+├── src/                          # Modular package (recommended)
+│   ├── data/                     # Data processing utilities
+│   ├── models/                   # Model configurations
+│   ├── training/                 # Training utilities
+│   └── utils/                    # Visualization and analysis
+├── model/                        # Core model implementations
+├── notebooks/                    # Jupyter notebook experiments
+├── data/                         # Raw dataset files
+├── pickles/                      # Preprocessed data
+└── example_usage.py              # Usage examples
+```
+
 ## Citation
 If our code was helpful to your research, we kindly ask that you cite our paper:
 ```
