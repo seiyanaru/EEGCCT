@@ -69,6 +69,7 @@ print(f"Average accuracy: {results['avg_accuracy']:.2f}%")
 - **Comprehensive analysis**: Automated visualization and reporting
 - **Reusable**: Clean modular structure for other projects
 - **4-class & 2-class support**: Motor imagery classification (left, right, feet, tongue)
+- **New MambaCCT model**: Combines convolutional tokenization with Mamba sequence modeling (see `test_mamba_cnn.py`)
 
 See `src/README.md` for detailed documentation and `example_usage.py` for complete examples.
 
@@ -78,6 +79,7 @@ Individual notebook files are also available for step-by-step experimentation:
 - `cct_bci2a_stmamba.ipynb` - Main STMambaCCT implementation
 - `cct_bci2a_no_augmentation.ipynb` - Baseline implementation
 - Various experiment notebooks in `cct_experiments/`
+- `test_mamba_cnn.py` - Example script for the new `MambaCCT` model
 
 ## Project Structure
 
