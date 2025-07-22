@@ -17,6 +17,16 @@ This paper introduces two versions of EEGCCT, an adaptation of the Compact Convo
 * numpy=1.19.5
 * cudatoolkit=11.3.1
 
+### Environment setup
+We recommend creating and activating the provided `eegcct` conda environment
+before running any scripts or notebooks:
+
+```bash
+conda activate eegcct
+```
+
+The environment includes all required Python packages such as `torch`.
+
 ## Datasets:
 The datasets used during the current study are available in the BCI Competition IV repository. The specific datasets used are 2a[1] and 2b[2], which can be accessed at \url{https://www.bbci.de/competition/iv/}.
 
@@ -59,6 +69,7 @@ print(f"Average accuracy: {results['avg_accuracy']:.2f}%")
 - **Comprehensive analysis**: Automated visualization and reporting
 - **Reusable**: Clean modular structure for other projects
 - **4-class & 2-class support**: Motor imagery classification (left, right, feet, tongue)
+- **New MambaCCT model**: Combines convolutional tokenization with Mamba sequence modeling (see `test_mamba_cnn.py`)
 
 See `src/README.md` for detailed documentation and `example_usage.py` for complete examples.
 
@@ -68,6 +79,7 @@ Individual notebook files are also available for step-by-step experimentation:
 - `cct_bci2a_stmamba.ipynb` - Main STMambaCCT implementation
 - `cct_bci2a_no_augmentation.ipynb` - Baseline implementation
 - Various experiment notebooks in `cct_experiments/`
+- `test_mamba_cnn.py` - Example script for the new `MambaCCT` model
 
 ## Project Structure
 
