@@ -36,50 +36,30 @@ Transactions on Neural Syst. Rehabil. Eng. 15, 473–482, DOI: 10.1109/TNSRE.200
 
 ## Usage
 
-### Option 1: Modular Package (Recommended)
+### Quick Start
 
-We provide a clean, modular package structure for easy experimentation and development:
+Run a single-subject experiment:
 
-```python
-# Option A: Simple train/test split
-from src.data.preprocessing import load_and_preprocess_bci_data
-from src.models.stmamba_utils import create_complete_setup
-from src.training.trainer import train_model
-from src.utils.visualization import create_comprehensive_report
-
-train_loader, test_loader, metadata = load_and_preprocess_bci_data()
-setup = create_complete_setup()
-results = train_model(setup, train_loader, test_loader)
-create_comprehensive_report(results, setup['model_config'], setup['training_config'])
-
-# Option B: LOSO evaluation (recommended for research)
-from src.training.trainer import run_loso_evaluation
-from src.utils.visualization import save_loso_report
-
-# Complete LOSO evaluation in 3 lines!
-results = run_loso_evaluation(n_classes=4, save_results=True)
-save_loso_report(results, "loso_results")
-print(f"Average accuracy: {results['avg_accuracy']:.2f}%")
+```bash
+python run_mamba_example.py --test-subject 0 --val-subject 1
 ```
 
-**Features:**
-- **LOSO Evaluation**: Subject-independent performance assessment (9-fold cross-validation)
-- **Memory-efficient**: Automatic GPU/CPU fallback, gradient accumulation
-- **Easy experimentation**: Simple configuration management
-- **Comprehensive analysis**: Automated visualization and reporting
-- **Reusable**: Clean modular structure for other projects
-- **4-class & 2-class support**: Motor imagery classification (left, right, feet, tongue)
-- **New MambaCCT model**: Combines convolutional tokenization with Mamba sequence modeling (see `test_mamba_cnn.py`)
+For a full leave-one-subject-out evaluation across all subjects:
 
-See `src/README.md` for detailed documentation and `example_usage.py` for complete examples.
+```bash
+python utils/run_training.py
+```
 
-### Option 2: Jupyter Notebooks
+### Jupyter Notebooks
 
-Individual notebook files are also available for step-by-step experimentation:
-- `cct_bci2a_stmamba.ipynb` - Main STMambaCCT implementation
-- `cct_bci2a_no_augmentation.ipynb` - Baseline implementation
-- Various experiment notebooks in `cct_experiments/`
-- `test_mamba_cnn.py` - Example script for the new `MambaCCT` model
+Notebook files are grouped under the `notebooks/` directory by model type:
+
+- `notebooks/stmamba/` – STMambaCCT experiments
+- `notebooks/cct/` – Baseline CCT implementations
+- `notebooks/mb_performer/` – Performer variants
+- `notebooks/cct_experiments/` – Additional CCT experiments
+
+You can run these notebooks individually for step-by-step exploration.
 
 ## Project Structure
 
@@ -92,9 +72,11 @@ EEGCCT/
 │   └── run_training.py           # Example LOSO experiment script
 ├── model/                        # Core model implementations
 ├── notebooks/                    # Jupyter notebook experiments
+├── run_mamba_example.py          # Single-subject training example
 ├── data/                         # Raw dataset files
 ├── pickles/                      # Preprocessed data
-└── example_usage.py              # Usage examples
+├── example_usage.py              # Usage examples
+└── loso_example_simple.py        # Minimal LOSO wrapper
 ```
 
 ## Citation
