@@ -85,11 +85,11 @@ Individual notebook files are also available for step-by-step experimentation:
 
 ```
 EEGCCT/
-├── src/                          # Modular package (recommended)
-│   ├── data/                     # Data processing utilities
-│   ├── models/                   # Model configurations
-│   ├── training/                 # Training utilities
-│   └── utils/                    # Visualization and analysis
+├── utils/                        # Data loading and training helpers
+│   ├── config.py                 # Centralized parameters
+│   ├── data_utils.py             # Loading/augmentation routines
+│   ├── training_utils.py         # Train/test helpers
+│   └── run_training.py           # Example LOSO experiment script
 ├── model/                        # Core model implementations
 ├── notebooks/                    # Jupyter notebook experiments
 ├── data/                         # Raw dataset files
