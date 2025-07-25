@@ -94,7 +94,15 @@ def run_single_fold(test_subject: int, val_subject: int, seed: int) -> tuple[flo
 
 
 def run_loso(seed: int | None = None) -> list[dict[str, float]]:
-    """Run LOSO evaluation across all subjects."""
+    """Run LOSO evaluation across all subjects.
+
+    Parameters
+    ----------
+    seed : int | None
+        Base random seed. Each fold will add the test subject index to
+        this value. When ``None``, a new random seed will be drawn for
+        every fold.
+    """
 
     results: list[dict[str, float]] = []
     accs: list[float] = []
@@ -132,16 +140,33 @@ def run_loso(seed: int | None = None) -> list[dict[str, float]]:
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Run LOSO evaluation for MambaCCT")
+    parser = argparse.ArgumentParser(
+        description="Train MambaCCT on one split or run LOSO evaluation"
+    )
     parser.add_argument(
-        "--seed",
+        "--test-subject",
         type=int,
-        default=None,
-        help="Base random seed. Different subjects will add their index to this value.",
+        default=0,
+        help="index of subject used for testing",
+    )
+    parser.add_argument(
+        "--val-subject",
+        type=int,
+        default=1,
+        help="index of subject used for validation",
+    )
+    parser.add_argument("--seed", type=int, default=42, help="random seed")
+    parser.add_argument(
+        "--loso",
+        action="store_true",
+        help="run leave-one-subject-out evaluation",
     )
     args = parser.parse_args()
 
-    run_loso(args.seed)
+    if args.loso:
+        run_loso(args.seed)
+    else:
+        run_single_fold(args.test_subject, args.val_subject, args.seed)
 
 
 if __name__ == "__main__":

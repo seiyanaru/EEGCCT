@@ -47,7 +47,8 @@ python run_mamba_example.py --test-subject 0 --val-subject 1
 To run all nine folds of LOSO evaluation:
 
 ```bash
-python run_mamba.py
+python run_mamba.py --loso
+
 ```
 
 For a full leave-one-subject-out evaluation across all subjects:
@@ -79,7 +80,7 @@ EEGCCT/
 ├── model/                        # Core model implementations
 ├── notebooks/                    # Jupyter notebook experiments
 ├── run_mamba_example.py          # Single-subject training example
-├── run_mamba.py                  # LOSO evaluation wrapper
+├── run_mamba.py                  # Command line training wrapper
 ├── data/                         # Raw dataset files
 ├── pickles/                      # Preprocessed data
 ├── example_usage.py              # Usage examples
