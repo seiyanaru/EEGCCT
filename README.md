@@ -48,6 +48,7 @@ To run all nine folds of LOSO evaluation:
 
 ```bash
 python run_mamba.py --loso
+
 ```
 
 For a full leave-one-subject-out evaluation across all subjects:
